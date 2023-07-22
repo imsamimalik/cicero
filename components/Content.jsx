@@ -1,7 +1,11 @@
 import { GoArrowRight } from "react-icons/go";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
+import { useContentStore } from "@/store/store";
 
 const Content = () => {
+
+	const referencesLoader = useContentStore((state) => state.referencesLoader);
+	const relatedLoader = useContentStore((state) => state.relatedLoader);
 	return (
 		<article className="flex flex-col items-center justify-between w-full gap-10 xl:items-start xl:flex-row">
 			<div>
@@ -56,7 +60,7 @@ const Content = () => {
 
 			<div className="flex flex-col flex-wrap items-center gap-10">
 				{/* REFRENCES */}
-				<div className="w-[20rem] px-8 py-6 border border-primary shadow-md">
+				<div className={`w-[20rem] ${ referencesLoader ? " opacity-0" : "opacity-100" } transition-opacity duration-500 px-8 py-6 border border-primary shadow-md`}>
 					<h3 className="pb-6 text-2xl font-bold text-black">
 						References
 					</h3>
@@ -69,7 +73,7 @@ const Content = () => {
 				</div>
 
 				{/* RELATED QUESTIONS */}
-				<div className="w-[20rem] px-8 py-6 bg-purple shadow-md">
+				<div className={`w-[20rem] ${ relatedLoader ? "opacity-0" : "opacity-100" } transition-opacity duration-500 px-8 py-6 bg-purple shadow-md`}>
 					<h3 className="pb-6 text-2xl font-bold text-black">
 						Related Questions
 					</h3>
