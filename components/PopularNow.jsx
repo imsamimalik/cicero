@@ -40,10 +40,10 @@ const PopularNow = () => {
 							key={article.id}
 							className="flex flex-col w-full p-6 bg-purple article"
 						>
-							<h3 className="text-xl font-medium ">
+							<h3 className="text-base font-medium  md:text-xl">
 								{article.title}
 							</h3>
-							<p className="text-lg">{article.description}</p>
+							<p className="text-sm  md:text-lg">{article.description}</p>
 							<div className="flex items-center w-full gap-10 ml-4 text-white">
 								<div className="flex items-center gap-2">
 									<MdThumbUp color="white" />
