@@ -13,8 +13,8 @@ export default function Home() {
             {loading && <Loader />}
             <div
                 className={`flex ${
-                    content === "" ? "h-0" : "h-screen"
-                } transition-all duration-1000 justify-center`}
+                    content === "" ? "h-0" : "h-auto"
+                } transition-all  duration-1000 justify-center`}
             >
                 {content !== "" && (
                     <>

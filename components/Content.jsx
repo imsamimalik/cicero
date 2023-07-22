@@ -6,13 +6,14 @@ const Content = () => {
 
 	const referencesLoader = useContentStore((state) => state.referencesLoader);
 	const relatedLoader = useContentStore((state) => state.relatedLoader);
+	const loading = useContentStore((state) => state.loading);
 	return (
 		<article className="flex flex-col items-center justify-between w-full gap-10 xl:items-start xl:flex-row">
 			<div>
 
 
 				{/* ANS */}
-				<div className="w-full px-8 py-6 mx-auto bg-white border border-black md:w-4/6 md:px-14">
+				<div className={`w-full px-8 py-6 mx-auto bg-white border border-black md:w-4/6 md:px-14`}>
 					<h2 className="pb-6 text-2xl font-bold text-black">
 						What is Recession
 					</h2>
