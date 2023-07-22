@@ -15,6 +15,15 @@ const Input = () => {
 		populateContent()
 	}
 
+	// call handleSubmit when Enter is pressed
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			setInput("")
+			populateContent()
+		}
+
+	}
 
 	return (
 		<section className="flex justify-center w-full my-20 bg-white ">
@@ -35,6 +44,7 @@ const Input = () => {
 						placeholder="Ask anything..."
 						className="w-full h-10 p-3 text-xl font-medium focus:outline-none"
 						value={input}
+						onKeyDown={(e) => handleKeyDown(e)}
 						onChange={(e) => setInput(e.target.value)}
 					/>
 					<div className="flex justify-between">
