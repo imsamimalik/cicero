@@ -97,7 +97,7 @@ const Dropdown = () => {
 
 						{OPTIONS.map(op => (
 
-							<div onClick={() => handleClick(op)} className=" max-w-[175px] flex-col flex items-start px-4 py-2 cursor-pointer hover:bg-gray-100">
+							<div key={op.id} onClick={() => handleClick(op)} className=" max-w-[175px] flex-col flex items-start px-4 py-2 cursor-pointer hover:bg-gray-100">
 								<div className='flex items-center gap-3'>
 									{createElement(op.icon, { size: 15, className: op.title === selected ? "text-accent" : "" })}
 									<p className={`text-xl font-medium text-gray-800 ${ op.title === selected ? "text-accent" : "text-gray-800" }`}>{op.title}</p>
