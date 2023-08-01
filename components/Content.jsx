@@ -1,12 +1,8 @@
-"use client";
 import { GoArrowRight } from "react-icons/go";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
 import { useContentStore } from "@/store/store";
-import { useState, useEffect } from "react";
 
 const Content = () => {
-	const [completedTyping, setCompletedTyping] = useState(false);
-	const [displayResponse, setDisplayResponse] = useState("");
 
 	const referencesLoader = useContentStore((state) => state.referencesLoader);
 	const relatedLoader = useContentStore((state) => state.relatedLoader);
@@ -16,31 +12,6 @@ const Content = () => {
 	);
 	const globalInput = useContentStore((state) => state.globalInput);
 
-	useEffect(() => {
-
-		if (content !== '') {
-			setCompletedTyping(false);
-			setDisplayResponse("");
-
-			let i = 0;
-			const stringResponse = content.cynthesis;
-
-			const animateText = () => {
-				setDisplayResponse(
-					(prevResponse) => prevResponse + stringResponse[i]
-				);
-				i++;
-
-				if (i < stringResponse.length) {
-					setTimeout(animateText, 30);
-				} else {
-					setCompletedTyping(true);
-				}
-			};
-
-			animateText();
-		}
-	}, [content]);
 
 	return (
 		<article className="flex flex-col items-center justify-between w-full gap-10 xl:items-start xl:flex-row">
@@ -52,7 +23,7 @@ const Content = () => {
 					<h2 className="pb-6 text-2xl font-bold text-black">
 						{globalInput}
 					</h2>
-					<p className="text-base md:text-xl">{displayResponse}</p>
+					<p className="text-base md:text-xl">{content?.cynthesis}</p>
 					<div className="w-2/3 mx-auto my-16 border border-primary" />
 					{/* THUMBS */}
 					<div className="flex justify-center gap-20 xl:gap-0 xl:justify-evenly">
@@ -85,12 +56,12 @@ const Content = () => {
 						References
 					</h3>
 					<ol className="pl-6 text-xl font-medium list-decimal list-inside marker:text-primary ">
-						{content?.reference?.map((el) => (
-							<a title={el.title} key={el.url} href={el.url}>
-								<li className="hover:underline">
+						{content?.reference?.map((el, index) => (
+							<li key={el.url + index}>
+								<a className="hover:underline" title={el.title} href={el.url}>
 									{el.url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0]}
-								</li>
-							</a>
+								</a>
+							</li>
 						))}
 					</ol>
 				</div>
@@ -114,8 +85,8 @@ const Content = () => {
 									title={el}
 									className="max-w-[220px] pb-5 border-[#ffffff83] border-b-[1px] "
 								>
-									{el.length > 45
-										? el.substr(0, 45) + "..."
+									{el.length > 40
+										? el.substr(0, 40) + "..."
 										: el}
 								</span>
 								<GoArrowRight size={30} color="white" />

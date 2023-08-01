@@ -16,7 +16,7 @@ const fetchData = async (input) => {
 
 	return data.data[0];
 };
-export const useContentStore = create((set) => ({
+export const useContentStore = create((set, get) => ({
 	globalInput: "",
 	content: "",
 	loading: false,
@@ -51,7 +51,7 @@ export const useContentStore = create((set) => ({
 			loading: false,
 			referencesLoader: true,
 			relatedLoader: true,
-		}),
-			await populateContent();
+		});
+		await get().populateContent(get().globalInput);
 	},
 }));
