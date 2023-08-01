@@ -5,22 +5,26 @@ import Dropdown from "./Dropdown";
 import { BsFillArrowRightCircleFill, BsArrowRepeat } from "react-icons/bs";
 import { useContentStore } from "@/store/store";
 const Input = () => {
-	const [input, setInput] = useState("");
+	const globalInput = useContentStore((state) => state.globalInput);
+	const setGlobalInput = useContentStore((state) => state.setGlobalInput);
+
+	// const [input, setInput] = useState(globalInput);
 
 	const populateContent = useContentStore((state) => state.populateContent);
 
+
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		setInput("")
-		populateContent()
+		populateContent(globalInput)
+		// setInput("")
 	}
 
 	// call handleSubmit when Enter is pressed
 	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			setInput("")
-			populateContent()
+			populateContent(globalInput)
+			// setInput("")
 		}
 
 	}
@@ -43,9 +47,9 @@ const Input = () => {
 					<input
 						placeholder="Ask anything..."
 						className="w-full h-10 p-3 text-xl font-medium focus:outline-none"
-						value={input}
+						value={globalInput}
 						onKeyDown={(e) => handleKeyDown(e)}
-						onChange={(e) => setInput(e.target.value)}
+						onChange={(e) => setGlobalInput(e.target.value)}
 					/>
 					<div className="flex justify-between">
 						<Dropdown />

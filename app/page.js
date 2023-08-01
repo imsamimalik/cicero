@@ -12,9 +12,7 @@ export default function Home() {
         <main className="flex flex-col items-center min-h-screen">
             {loading && <Loader />}
             <div
-                className={`flex ${
-                    content === "" ? "h-0" : "h-auto"
-                } transition-all  duration-1000 justify-center`}
+                className={`flex transition-all  duration-1000 justify-center`}
             >
                 {content !== "" && (
                     <>
