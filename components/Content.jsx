@@ -3,7 +3,6 @@ import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
 import { useContentStore } from "@/store/store";
 
 const Content = () => {
-
 	const referencesLoader = useContentStore((state) => state.referencesLoader);
 	const relatedLoader = useContentStore((state) => state.relatedLoader);
 	const content = useContentStore((state) => state.content);
@@ -11,7 +10,6 @@ const Content = () => {
 		(state) => state.setGlobalInputReset
 	);
 	const globalInput = useContentStore((state) => state.globalInput);
-
 
 	return (
 		<article className="flex flex-col items-center justify-between w-full gap-10 xl:items-start xl:flex-row">
@@ -58,8 +56,19 @@ const Content = () => {
 					<ol className="pl-6 text-xl font-medium list-decimal list-inside marker:text-primary ">
 						{content?.reference?.map((el, index) => (
 							<li key={el.url + index}>
-								<a className="hover:underline" title={el.title} href={el.url}>
-									{el.url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0]}
+								<a
+									className="hover:underline"
+									title={el.title}
+									href={el.url}
+								>
+									{
+										el.url
+											.replace(
+												/^(?:https?:\/\/)?(?:www\.)?/i,
+												""
+											)
+											.split("/")[0]
+									}
 								</a>
 							</li>
 						))}
@@ -85,9 +94,7 @@ const Content = () => {
 									title={el}
 									className="max-w-[220px] pb-5 border-[#ffffff83] border-b-[1px] "
 								>
-									{el.length > 40
-										? el.substr(0, 40) + "..."
-										: el}
+									{el}
 								</span>
 								<GoArrowRight size={30} color="white" />
 							</li>
