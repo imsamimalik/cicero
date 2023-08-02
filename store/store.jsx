@@ -14,6 +14,11 @@ const fetchData = async (input) => {
 
 	const data = await response.json();
 
+	console.log(
+		"🚀 ~ file: store.jsx ~ line 8 ~ fetchData ~ data",
+		data.data[0]
+	);
+
 	return data.data[0];
 };
 export const useContentStore = create((set, get) => ({

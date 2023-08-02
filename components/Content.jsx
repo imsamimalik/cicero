@@ -21,7 +21,11 @@ const Content = () => {
 					<h2 className="pb-6 text-2xl font-bold text-black">
 						{globalInput}
 					</h2>
-					<p className="text-base md:text-xl">{content?.cynthesis}</p>
+					<p
+						className="text-base md:text-xl"
+						dangerouslySetInnerHTML={{ __html: content?.cynthesis }}
+					/>
+
 					<div className="w-2/3 mx-auto my-16 border border-primary" />
 					{/* THUMBS */}
 					<div className="flex justify-center gap-20 xl:gap-0 xl:justify-evenly">
@@ -54,21 +58,10 @@ const Content = () => {
 						References
 					</h3>
 					<ol className="pl-6 text-xl font-medium list-decimal list-inside marker:text-primary ">
-						{content?.reference?.map((el, index) => (
-							<li key={el.url + index}>
-								<a
-									className="hover:underline"
-									title={el.title}
-									href={el.url}
-								>
-									{
-										el.url
-											.replace(
-												/^(?:https?:\/\/)?(?:www\.)?/i,
-												""
-											)
-											.split("/")[0]
-									}
+						{content?.reference?.map((el) => (
+							<li key={el.id}>
+								<a className="hover:underline" href={el.url}>
+									{el.website}
 								</a>
 							</li>
 						))}
@@ -94,7 +87,9 @@ const Content = () => {
 									title={el}
 									className="max-w-[220px] pb-5 border-[#ffffff83] border-b-[1px] "
 								>
-									{el}
+									{el.length > 60
+										? el.substring(0, 60) + "..."
+										: el}
 								</span>
 								<GoArrowRight size={30} color="white" />
 							</li>
