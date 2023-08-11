@@ -1,29 +1,18 @@
 "use client";
 import Content from "@/components/Content";
 import Input from "@/components/Input";
-import Loader from "@/components/Loader";
-import PopularNow from "@/components/PopularNow";
-import Sidebar from "@/components/Sidebar";
+import Title from "@/components/Title";
 import { useContentStore } from "@/store/store";
 export default function Home() {
     const content = useContentStore((state) => state.content);
     const loading = useContentStore((state) => state.loading);
-    return (
-        <main className="flex flex-col items-center min-h-screen">
-            {loading && <Loader />}
-            <div
-                className={`flex transition-all  duration-1000 justify-center`}
-            >
-                {content !== "" && (
-                    <>
-                        <Sidebar />
-                        <Content />
-                    </>
-                )}
-            </div>
 
-            <Input />
-            {content === "" && <PopularNow />}
+    return (
+        <main className="flex flex-col mx-auto items-center max-w-[1200px]">
+            <Title />
+            {(loading || content !== "") && <Content />}
+
+            {!loading && content === "" && <Input />}
         </main>
     );
 }

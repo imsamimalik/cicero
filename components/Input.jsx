@@ -1,61 +1,46 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
 import Dropdown from "./Dropdown";
-import { BsFillArrowRightCircleFill, BsArrowRepeat } from "react-icons/bs";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useContentStore } from "@/store/store";
 const Input = () => {
 	const globalInput = useContentStore((state) => state.globalInput);
 	const setGlobalInput = useContentStore((state) => state.setGlobalInput);
 
-	// const [input, setInput] = useState(globalInput);
 
 	const populateContent = useContentStore((state) => state.populateContent);
 
-
 	const handleSubmit = (e) => {
-		e.preventDefault()
-		populateContent(globalInput)
+		e.preventDefault();
+		populateContent(globalInput);
 		// setInput("")
-	}
+	};
 
 	// call handleSubmit when Enter is pressed
 	const handleKeyDown = (e) => {
-		if (e.key === 'Enter') {
-			e.preventDefault()
-			populateContent(globalInput)
+		if (globalInput && e.key === "Enter") {
+			e.preventDefault();
+			populateContent(globalInput);
 			// setInput("")
 		}
-
-	}
+	};
 
 	return (
-		<section className="flex justify-center w-full my-20 bg-white ">
+		<section className="flex flex-col items-center justify-center my-20 bg-white md:w-4/5 ">
 			<div className="flex items-center w-full mx-auto md:w-3/5">
-				<Image
-					src="/assets/images/avatar.png"
-					width={150}
-					height={140}
-					alt="Avatar"
-					className="hidden -mt-8 md:block"
-				/>
-				<div className="flex-1 relative px-4 h-[100px] py-2 border shadow-md border-primary">
-					<BsArrowRepeat
-						className=" absolute -top-5 right-20 rotate-[110deg] bg-purple p-2 rounded-full"
-						size={40}
-					/>
+				<div className="flex-1 relative px-4 h-[100px] py-2 rounded-xl border shadow-md border-primary">
 					<input
 						placeholder="Ask anything..."
-						className="w-full h-10 p-3 text-xl font-medium focus:outline-none"
+						rows={1}
+						className="w-full h-10 p-3 overflow-auto text-xl font-medium focus:outline-none"
 						value={globalInput}
 						onKeyDown={(e) => handleKeyDown(e)}
 						onChange={(e) => setGlobalInput(e.target.value)}
 					/>
 					<div className="flex justify-between">
 						<Dropdown />
-						<button onClick={handleSubmit} >
+						<button disabled={!globalInput} onClick={handleSubmit}>
 							<BsFillArrowRightCircleFill
-								className=" fill-primary"
+								className={`${ globalInput ? "fill-primary" : "fill-primary/75 cursor-not-allowed" }`}
 								size={35}
 							/>
 						</button>
