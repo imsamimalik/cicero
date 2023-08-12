@@ -52,6 +52,9 @@ const Content = () => {
 										<a
 											className="hover:underline"
 											href={el.url}
+											target="_blank"
+											rel="noreferrer"
+
 										>
 											{el.website}
 										</a>
