@@ -54,9 +54,12 @@ const Content = () => {
 											href={el.url}
 											target="_blank"
 											rel="noreferrer"
-
+											title={el.title}
 										>
-											{el.website}
+											{el.title.length > 80
+												? el.title.substring(0, 80) +
+												"..."
+												: el.title}
 										</a>
 									</li>
 								))}
